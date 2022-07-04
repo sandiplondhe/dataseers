@@ -12,7 +12,7 @@ const Login = () => {
     console.log("values", values);
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/user/login`,
+        `${process.env.REACT_APP_API_ENDPOINT}/login`,
         values
       );
       message.success(res.data.success);

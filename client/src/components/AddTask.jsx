@@ -27,7 +27,7 @@ const AddTask = () => {
     };
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/tasks`,
+        `${process.env.REACT_APP_API_ENDPOINT}/tasks`,
         formData,
         config
       );
