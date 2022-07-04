@@ -22,7 +22,7 @@ const Register = () => {
       );
       message.success(res.data.success);
       localStorage.setItem("access_token", res.data.token);
-      navigate("/addtotask");
+      navigate("/addtask");
     } catch (error) {
       console.error(error);
     }

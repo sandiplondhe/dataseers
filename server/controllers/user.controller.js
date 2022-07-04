@@ -40,7 +40,6 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log("email", email);
     if (!(email && password)) {
       res.status(400).send("All input are required");
     }

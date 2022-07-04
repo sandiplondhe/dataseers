@@ -1,12 +1,43 @@
 import React from "react";
-import { Form, Input, Button, message, Upload } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { Form, Input, Button, message, Upload, DatePicker } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import axios from "axios";
+import moment from "moment";
+const { RangePicker } = DatePicker;
 
 const AddTask = () => {
-  const onFinish = (values) => {
-    console.log(values);
+  const [form] = Form.useForm();
+  const onFinish = async (values) => {
+    let start_time = moment(values.time[0]._d).format(
+      "MMMM Do YYYY, h:mm:ss a"
+    );
+    const token = localStorage && localStorage.getItem("access_token");
+    let end_time = moment(values.time[1]._d).format("MMMM Do YYYY, h:mm:ss a");
+    const formData = {
+      task_name: values.name,
+      token: token,
+      description: values.description,
+      start_time,
+      end_time,
+    };
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/api/tasks`,
+        formData,
+        config
+      );
+      message.success(res.data.success);
+      form.resetFields();
+    } catch (error) {
+      message.error(error.data.error);
+    }
   };
+
   return (
     <div>
       {" "}
@@ -43,7 +74,7 @@ const AddTask = () => {
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="description"
+            placeholder="Description"
           />
         </Form.Item>
         <Form.Item
@@ -55,10 +86,7 @@ const AddTask = () => {
             },
           ]}
         >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Required Time"
-          />
+          <RangePicker showTime />
         </Form.Item>
 
         <Form.Item>

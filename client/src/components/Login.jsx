@@ -9,20 +9,15 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   let navigate = useNavigate();
   const onFinish = async (values) => {
-    const config = {
-      headers: {
-        "content-type": "application/json",
-      },
-    };
+    console.log("values", values);
     try {
-      const res = await axios.get(
+      const res = await axios.post(
         `http://localhost:5000/api/user/login`,
-        values,
-        config
+        values
       );
       message.success(res.data.success);
       localStorage.setItem("access_token", res.data.token);
-      navigate("/addtotask");
+      navigate("/addtask");
     } catch (error) {
       console.error(error);
     }

@@ -23,7 +23,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = require("./users")(sequelize, DataTypes);
-db.task = require("./task")(sequelize, DataTypes);
+db.tasks = require("./task")(sequelize, DataTypes);
 
 db.sequelize.sync().then(() => {
   console.log("Re-sync");

@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
     },
-    task_time: {
+    start_time: {
+      type: DataTypes.STRING,
+      required: true,
+    },
+    end_time: {
       type: DataTypes.STRING,
       required: true,
     },

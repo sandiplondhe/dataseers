@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user/", require("./routes/user"));
+app.use("/api/tasks/", require("./routes/task"));
 
 app.listen(process.env.PORT, (req, res) => {
   console.log(`server is running on ${process.env.PORT}`);
