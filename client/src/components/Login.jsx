@@ -15,7 +15,7 @@ const Login = () => {
         values
       );
       message.success(res.data.success);
-      localStorage.setItem("access_token", res.data.token);
+      localStorage.setItem("access-token", res.data.token);
       navigate("/addtask");
     } catch (error) {
       console.error(error);
@@ -79,7 +79,7 @@ const Login = () => {
       </Form>
     );
   };
-  const token = localStorage && localStorage.getItem("access_token");
+  const token = localStorage && localStorage.getItem("access-token");
 
   const StartScreen = () => {
     return <h2>Welcome to task manager</h2>;

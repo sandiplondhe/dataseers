@@ -6,7 +6,7 @@ import moment from "moment";
 const { RangePicker } = DatePicker;
 
 const AddTask = () => {
-  const token = localStorage && localStorage.getItem("access_token");
+  const token = localStorage && localStorage.getItem("access-token");
 
   useEffect(() => {
     if (!token) {

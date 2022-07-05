@@ -57,9 +57,16 @@ const deleteTask = async (req, res) => {
   }
 };
 
+// @update task
+const updateTask = async (req, res) => {
+  console.log("body", req.body);
+  res.status(200).send({ success: "Task updated" });
+};
+
 module.exports = {
   createTask,
   getAllTaskByUser,
   getTaskDetails,
   deleteTask,
+  updateTask,
 };
