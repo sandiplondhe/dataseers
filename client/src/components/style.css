@@ -8,3 +8,12 @@
 .login-form-button {
   width: 100%;
 }
+.task_data {
+  width: 80%;
+  margin: auto;
+}
+.menu {
+  width: 15%;
+  margin: auto;
+  padding-bottom: 30px;
+}

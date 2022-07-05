@@ -26,6 +26,40 @@ const createTask = async (req, res) => {
   }
 };
 
+// @get all task by user
+const getAllTaskByUser = async (req, res) => {
+  const user = await Users.findOne({ where: { email: req.user.email } });
+  const tasks = await Tasks.findAndCountAll({ where: { user_id: user.id } });
+  if (tasks) {
+    res.status(200).send({ success: tasks });
+  } else {
+    res.status(404).send({ failed: "No tasks found" });
+  }
+};
+
+// @ single task details
+const getTaskDetails = async (req, res) => {
+  const task = await Tasks.findOne({ where: { id: req.params.id } });
+  if (task) {
+    res.status(200).send({ task });
+  } else {
+    res.status(404).send({ failed: "No task found" });
+  }
+};
+
+// @delete task
+const deleteTask = async (req, res) => {
+  const task = await Tasks.destroy({ where: { id: req.params.id } });
+  if (task) {
+    res.status(200).send({ success: "Task deleted" });
+  } else {
+    res.status(404).send({ failed: "No task found" });
+  }
+};
+
 module.exports = {
   createTask,
+  getAllTaskByUser,
+  getTaskDetails,
+  deleteTask,
 };

@@ -3,5 +3,8 @@ const TaskController = require("../controllers/task.controller");
 const verifyToken = require("../middleware/auth");
 
 router.post("/", verifyToken, TaskController.createTask);
+router.get("/", verifyToken, TaskController.getAllTaskByUser);
+router.get("/:id", verifyToken, TaskController.getTaskDetails);
+router.delete("/:id", verifyToken, TaskController.deleteTask);
 
 module.exports = router;

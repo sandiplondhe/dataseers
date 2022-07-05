@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Button, message, Upload, DatePicker } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import axios from "axios";
@@ -6,12 +6,21 @@ import moment from "moment";
 const { RangePicker } = DatePicker;
 
 const AddTask = () => {
+  const token = localStorage && localStorage.getItem("access_token");
+
+  useEffect(() => {
+    if (!token) {
+      message.warning("Please log in to add task");
+    }
+    return () => console.log("Unmount");
+  });
+
   const [form] = Form.useForm();
   const onFinish = async (values) => {
     let start_time = moment(values.time[0]._d).format(
       "MMMM Do YYYY, h:mm:ss a"
     );
-    const token = localStorage && localStorage.getItem("access_token");
+
     let end_time = moment(values.time[1]._d).format("MMMM Do YYYY, h:mm:ss a");
     const formData = {
       task_name: values.name,
