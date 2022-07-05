@@ -59,8 +59,16 @@ const deleteTask = async (req, res) => {
 
 // @update task
 const updateTask = async (req, res) => {
-  console.log("body", req.body);
-  res.status(200).send({ success: "Task updated" });
+  const formData = {
+    task_name: req.body.task_name,
+    description: req.body.task_description,
+  };
+  await Tasks.update(formData, { where: { id: req.body.id } }).then(
+    (result) => {
+      console.log(result);
+    }
+  );
+  res.status(200).send({ success: "Task Updated" });
 };
 
 module.exports = {

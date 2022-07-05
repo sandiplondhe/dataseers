@@ -25,15 +25,24 @@ const ShowTask = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
+    const formData = {
+      id: editingRow,
+      task_name: values.task_name,
+      description: values.description,
+    };
     try {
       await axios
-        .patch(`${process.env.REACT_APP_API_ENDPOINT}/tasks/${editingRow}`, {
-          values,
-          headers: {
-            "access-token": `${token}`,
-          },
-        })
+        .patch(
+          `${process.env.REACT_APP_API_ENDPOINT}/tasks/${editingRow}`,
+          formData,
+          {
+            headers: {
+              "access-token": `${token}`,
+            },
+          }
+        )
         .then((result) => console.log(result))
+        .then(message.success("Task updated successfully"))
         .catch((error) => console.error(error));
     } catch (error) {
       console.error(error);
