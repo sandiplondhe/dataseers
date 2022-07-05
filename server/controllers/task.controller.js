@@ -61,7 +61,7 @@ const deleteTask = async (req, res) => {
 const updateTask = async (req, res) => {
   const formData = {
     task_name: req.body.task_name,
-    description: req.body.task_description,
+    description: req.body.description,
   };
   await Tasks.update(formData, { where: { id: req.body.id } }).then(
     (result) => {
